@@ -4,6 +4,7 @@ jobs:
   build:
     docker:
       - image: cimg/go:1.17.7
+    working_directory: /mnt/ramdisk/circle-go-repro
     environment:
       GOCACHE: /mnt/ramdisk/go-build-cache
       GOMODCACHE: "/mnt/ramdisk/go-mod-cache"
