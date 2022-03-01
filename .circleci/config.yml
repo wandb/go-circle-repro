@@ -5,16 +5,18 @@ jobs:
     docker:
       - image: cimg/go:1.17.7
     environment:
+      GOCACHE: /mnt/ramdisk/go-build-cache
       GOMODCACHE: "/mnt/ramdisk/go-mod-cache"
     steps:
       - checkout
       - restore_cache:
           keys:
-            - golang-0-{{ checksum "go.sum" }}
-            - golang-0-
+            - golang-1-{{ checksum "go.sum" }}
+            - golang-1-
       - run: go install
       - save_cache:
           paths:
+            - "/mnt/ramdisk/go-build-cache"
             - "/mnt/ramdisk/go-mod-cache"
-          key: golang-0-{{ checksum "go.sum" }}
+          key: golang-1-{{ checksum "go.sum" }}
       - run: go build && ls go-circle-repro
