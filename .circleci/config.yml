@@ -11,7 +11,8 @@ jobs:
       GOCACHE: /mnt/ramdisk/go-build-cache
       GOMODCACHE: "/mnt/ramdisk/go-mod-cache"
     steps:
-      - git-shallow-clone/checkout
+      - git-shallow-clone/checkout:
+          path: /mnt/ramdisk/circle-go-repro
       - restore_cache:
           keys:
             - golang-1-{{ checksum "go.sum" }}
