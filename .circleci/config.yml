@@ -16,12 +16,12 @@ jobs:
           path: /mnt/ramdisk/circle-go-repro
       - restore_cache:
           keys:
-            - golang-1-{{ checksum "go.sum" }}
-            - golang-1-
+            - golang-2-{{ checksum "go.sum" }}
+            - golang-2-
       - run: go install
       - save_cache:
           paths:
             - "/mnt/ramdisk/go-build-cache"
             - "/mnt/ramdisk/go-mod-cache"
-          key: golang-1-{{ checksum "go.sum" }}
+          key: golang-2-{{ checksum "go.sum" }}
       - run: go build && ls go-circle-repro
