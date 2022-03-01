@@ -1,0 +1,19 @@
+version: 2.1
+
+jobs:
+  build:
+    docker:
+      - image: cimg/go:1.17.7
+    environment:
+      GOMODCACHE: "/mnt/ramdisk/go-mod-cache"
+    steps:
+      - restore_cache:
+          keys:
+            - golang-0-{{ checksum "go.sum" }}
+            - golang-0-
+      - run: go install
+      - save_cache:
+          paths:
+            - "/mnt/ramdisk/go-mod-cache"
+          key: golang-0-{{ checksum "go.sum" }}
+      - run: go build && ls go_circle_repro
