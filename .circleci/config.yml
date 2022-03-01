@@ -17,4 +17,4 @@ jobs:
           paths:
             - "/mnt/ramdisk/go-mod-cache"
           key: golang-0-{{ checksum "go.sum" }}
-      - run: go build && ls go_circle_repro
+      - run: go build && ls go-circle-repro
