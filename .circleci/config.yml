@@ -1,4 +1,6 @@
 version: 2.1
+orbs:
+  git-shallow-clone: tiendanube/git-shallow-clone@2.0.3
 
 jobs:
   build:
@@ -9,7 +11,7 @@ jobs:
       GOCACHE: /mnt/ramdisk/go-build-cache
       GOMODCACHE: "/mnt/ramdisk/go-mod-cache"
     steps:
-      - checkout
+      - git-shallow-clone/checkout
       - restore_cache:
           keys:
             - golang-1-{{ checksum "go.sum" }}
